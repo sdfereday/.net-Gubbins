@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Client Listing</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+    <div class="container">
+        <label>
+            Select Client:
+        </label>
+        <ul id="clients">
+
+        </ul>
+        <select id="clients">
+            <option>Retrieving clients...</option>
+        </select>
+        <select id="assignedUsers">
+            <option>-</option>
+        </select>
+        <div class="client-data">
+            <p id="username">Username: <span id="value">-</span></p>
+            <input id="updatedUsername" placeholder="Update Name"/>
+            <button id="update">Update</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="js/site.js"></script>
+</body>
+</html>
