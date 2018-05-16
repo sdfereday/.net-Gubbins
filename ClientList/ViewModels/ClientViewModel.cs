@@ -8,5 +8,6 @@ namespace ClientList.ViewModels
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public List<UserViewModel> Users { get; set; }
     }
 }

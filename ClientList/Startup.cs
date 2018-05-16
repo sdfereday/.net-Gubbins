@@ -26,6 +26,7 @@ namespace ClientList
             // Configure further stuff.
             // Would we usually serve static files and API from same place? Seems a bit pointless...
             app.UseStaticFiles();
+            app.UseDeveloperExceptionPage();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

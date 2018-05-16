@@ -174,3 +174,14 @@ select {
 .nav a {
     padding-right: 1em;
 }
+
+.list {
+    width: 100%;
+}
+.list li {
+    margin-bottom: 1em;
+}
+
+dl h5 {
+    margin: 0;
+}

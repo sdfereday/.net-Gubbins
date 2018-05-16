@@ -1,4 +1,4 @@
-﻿@model ClientList.Models.ClientModel;
+﻿@model IEnumerable<ClientList.ViewModels.ClientViewModel>;
 
 @{
     ViewData["Title"] = "Index";
@@ -14,8 +14,26 @@
         <h2>@ViewData["Title"].</h2>
         <ul class="nav">
             <li class="nav-item">@Html.ActionLink("Home", "Index", "Client")</li>
-            <li class="nav-item">@Html.ActionLink("Create", "Create", "Client")</li>
+            <li class="nav-item">@Html.ActionLink("List Clients", "EditList", "Client")</li>
+            <li class="nav-item">@Html.ActionLink("Create Client", "Create", "Client")</li>
+            <li class="nav-item">@Html.ActionLink("List Users", "EditList", "User")</li>
+            <li class="nav-item">@Html.ActionLink("Create User", "Create", "User")</li>
         </ul>
+        @if(Model != null && Model.Count() > 0)
+        {
+            <h3>Currently Active Clients:</h3>
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li><a href="Client/Edit/@item.Id">Edit</a> - Name: @item.Name</li>
+                }
+            </ul>
+        } else
+        {
+            <p>You have no clients yet. Would you like to create one?</p>
+            <a href="Client/Create">Click here</a>
+
+        }
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

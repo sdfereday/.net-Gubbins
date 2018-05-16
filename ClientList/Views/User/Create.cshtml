@@ -1,14 +1,14 @@
-﻿@model ClientList.ViewModels.ClientViewModel;
+﻿@model ClientList.ViewModels.UserViewModel;
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create User";
 }
 <html>
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/styles.css" rel="stylesheet" />
 </head>
-<body> 
+<body>
     <div class="container">
         <div class="row">
             <div class="col">
@@ -21,10 +21,20 @@
                     <li class="nav-item">@Html.ActionLink("Create User", "Create", "User")</li>
                 </ul>
                 <p>
-                    Enter client name.
+                    Enter a first name.
                 </p>
                 <form method="POST">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    <p>Associated Client:</p>
+                    @if (Model != null && Model.Clients != null && Model.Clients.Count() > 0)
+                    {
+                        @Html.DropDownListFor(model => model.ClientId, new SelectList(Model.Clients, "Id", "Name"), "Select Associated Client", new { @id = "ClientId", @class = "input-large form-control" })
+                    }
+                    <p>First Name:</p>
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    <p>Last Name:</p>
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    <p>Email Address:</p>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                     <input type="submit" />
                 </form>
             </div>

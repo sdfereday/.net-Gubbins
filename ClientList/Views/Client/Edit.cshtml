@@ -15,18 +15,17 @@
                 <h2>@ViewData["Title"].</h2>
                 <ul class="nav">
                     <li class="nav-item">@Html.ActionLink("Home", "Index", "Client")</li>
-                    <li class="nav-item">@Html.ActionLink("Create", "Create", "Client")</li>
+                    <li class="nav-item">@Html.ActionLink("List Clients", "EditList", "Client")</li>
+                    <li class="nav-item">@Html.ActionLink("Create Client", "Create", "Client")</li>
+                    <li class="nav-item">@Html.ActionLink("List Users", "EditList", "User")</li>
+                    <li class="nav-item">@Html.ActionLink("Create User", "Create", "User")</li>
                 </ul>
-                <p>
-                    Enter client name.
-                </p>
-                @using (Html.BeginForm("AddProduct", "Category", new { id = Model.Id }, FormMethod.Post))
-                {
+                <form action="@Model.Id" method="post">
+                    <p>@Html.DisplayNameFor(model => model.Name)</p>
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    <input type="submit" value="Add" />
-                }
+                    <input type="submit" />
+                </form>
             </div>
-            <div class="col"></div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

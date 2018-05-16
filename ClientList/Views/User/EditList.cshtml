@@ -1,14 +1,15 @@
-﻿@model ClientList.ViewModels.ClientViewModel;
+﻿@model IEnumerable<ClientList.ViewModels.UserViewModel>;
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit Users";
+    bool noData = Model.Count() == 0;
 }
 <html>
 <head>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/styles.css" rel="stylesheet" />
 </head>
-<body> 
+<body>
     <div class="container">
         <div class="row">
             <div class="col">
@@ -20,13 +21,35 @@
                     <li class="nav-item">@Html.ActionLink("List Users", "EditList", "User")</li>
                     <li class="nav-item">@Html.ActionLink("Create User", "Create", "User")</li>
                 </ul>
-                <p>
-                    Enter client name.
-                </p>
-                <form method="POST">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    <input type="submit" />
-                </form>
+                @if (noData)
+                {
+                    <p>Couldn't find any users.</p>
+                }
+                else
+                {
+                    <ul class="list">
+                        @foreach (var item in Model)
+                        {
+                        <li>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title"><a href="Edit/@item.Id">Edit User</a></h3>
+                                    <dl>
+                                        <dt>Associated Client:</dt>
+                                        <dd>@item.ClientId</dd>
+                                        <dt>First Name:</dt>
+                                        <dd>@item.FirstName</dd>
+                                        <dt>Last Name:</dt>
+                                        <dd>@item.LastName</dd>
+                                        <dt>Email:</dt>
+                                        <dd>@item.Email</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </li>
+                        }
+                    </ul>
+                }
             </div>
         </div>
     </div>

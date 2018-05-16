@@ -20,9 +20,17 @@ namespace ClientList.Controllers
             this._mapper = mapper;
         }
 
+        public ClientModel GetClientById(Guid Id)
+        {
+            return _context.Clients
+                .ToList()
+                .Find(x => x.Id == Id);
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var clientMapping = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients);
+            return View(clientMapping);
         }
 
         [HttpGet]
@@ -43,34 +51,55 @@ namespace ClientList.Controllers
 
             _context.Clients.Add(modelMapping);
             await _context.SaveChangesAsync();
-            return RedirectToPage("/Client");
+            return RedirectToAction("Edit");
+        }
+
+        [HttpGet]
+        public IActionResult EditList()
+        {
+            // hmmmmmmmmmmmmmmmmmm......
+            var clientMapping = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients);
+            
+            foreach(var item in clientMapping)
+            {
+                var associatedUsers = _context.Users
+                    .Where(x => x.ClientId == item.Id)
+                    .ToList();
+
+                item.Users = _mapper.Map<List<UserViewModel>>(associatedUsers);
+            }
+
+            return View(clientMapping);
         }
 
         [HttpGet]
         public IActionResult Edit()
         {
-            return View();
+            return RedirectToAction("EditList");
         }
 
-        [HttpGet]
+        [HttpGet("Client/Edit/{id}")]
         public IActionResult Edit(Guid id)
         {
-            return View();
+            var clientModel = GetClientById(id);
+
+            if(clientModel == null)
+            {
+                return View("EditList");
+            }
+
+            var clientViewModel = this._mapper.Map<ClientViewModel>(clientModel);
+            return View(clientViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(ClientViewModel client, Guid id)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id, Name")] ClientViewModel client)
         {
-            if(!ModelState.IsValid)
-            {
-                return View();
-            }
-
             var modelMapping = this._mapper.Map<ClientModel>(client);
 
             _context.Clients.Update(modelMapping);
             await _context.SaveChangesAsync();
-            return RedirectToPage("client");
+            return RedirectToAction("EditList");
         }
     }
 }

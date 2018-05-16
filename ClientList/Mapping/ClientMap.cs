@@ -8,8 +8,9 @@ namespace ClientList.Mapping
     {
         public ClientMap()
         {
-            CreateMap<ViewModels.ClientViewModel, Models.ClientModel>();
-            CreateMap<ViewModels.UserViewModel, Models.UserModel>();
+            CreateMap<Models.ClientModel, ViewModels.ClientViewModel>();
+            CreateMap<Models.UserModel, ViewModels.UserViewModel>()
+                .ForMember(x => x.Clients, opt => opt.Ignore());
         }
     }    
 }
