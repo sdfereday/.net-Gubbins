@@ -27,6 +27,20 @@ namespace ClientList.Controllers
                 .Find(x => x.Id == Id);
         }
 
+        public ClientViewModel GetClientWithUsers(Guid Id)
+        {
+            var clientModel = GetClientById(Id);
+            var clientMap = this._mapper.Map<ClientViewModel>(clientModel);
+
+            var associatedUsers = _context.Users
+                .Where(x => x.ClientId == clientMap.Id)
+                .ToList();
+
+            clientMap.Users = _mapper.Map<List<UserViewModel>>(associatedUsers);
+
+            return clientMap;
+        }
+
         public IActionResult Index()
         {
             var clientMapping = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients);
@@ -57,19 +71,15 @@ namespace ClientList.Controllers
         [HttpGet]
         public IActionResult EditList()
         {
-            // hmmmmmmmmmmmmmmmmmm......
-            var clientMapping = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients);
-            
-            foreach(var item in clientMapping)
+            var mappingWithUsers = new List<ClientViewModel>();
+
+            foreach(var client in _context.Clients)
             {
-                var associatedUsers = _context.Users
-                    .Where(x => x.ClientId == item.Id)
-                    .ToList();
-
-                item.Users = _mapper.Map<List<UserViewModel>>(associatedUsers);
+                var mappedClient = GetClientWithUsers(client.Id);
+                mappingWithUsers.Add(mappedClient);
             }
-
-            return View(clientMapping);
+            
+            return View(mappingWithUsers);
         }
 
         [HttpGet]

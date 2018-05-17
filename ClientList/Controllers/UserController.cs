@@ -81,7 +81,10 @@ namespace ClientList.Controllers
                 return View("EditList");
             }
 
+
             var userViewModel = this._mapper.Map<UserViewModel>(userModel);
+            userViewModel.Clients = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients);
+
             return View(userViewModel);
         }
 

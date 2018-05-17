@@ -1,7 +1,7 @@
 ﻿@model ClientList.ViewModels.UserViewModel;
 
 @{
-    ViewData["Title"] = "Create User";
+    ViewData["Title"] = "Edit";
 }
 <html>
 <head>
@@ -20,11 +20,9 @@
                     <li class="nav-item">@Html.ActionLink("List Users", "EditList", "User")</li>
                     <li class="nav-item">@Html.ActionLink("Create User", "Create", "User")</li>
                 </ul>
-                <p>
-                    Enter a first name.
-                </p>
-                <form method="POST">
+                <form action="@Model.Id" method="post">
                     <p>Associated Client:</p>
+                    <p><strong>@Model.ClientId</strong></p>
                     @if (Model != null && Model.Clients != null && Model.Clients.Count() > 0)
                     {
                         @Html.DropDownListFor(model => model.ClientId, new SelectList(Model.Clients, "Id", "Name"), "Select Associated Client", new { @id = "ClientId", @class = "input-large form-control" })
@@ -32,12 +30,13 @@
                     else
                     {
                         <p>No clients found.</p>
+
                     }
-                    <p>First Name:</p>
+                    <p>@Html.DisplayNameFor(model => model.FirstName)</p>
                     @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                    <p>Last Name:</p>
+                    <p>@Html.DisplayNameFor(model => model.LastName)</p>
                     @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                    <p>Email Address:</p>
+                    <p>@Html.DisplayNameFor(model => model.Email)</p>
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                     <input type="submit" />
                 </form>
