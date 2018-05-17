@@ -65,12 +65,6 @@ namespace ClientList.Controllers
             return View(userMapping);
         }
 
-        [HttpGet]
-        public IActionResult Edit()
-        {
-            return RedirectToAction("EditList");
-        }
-
         [HttpGet("User/Edit/{id}")]
         public IActionResult Edit(Guid id)
         {
