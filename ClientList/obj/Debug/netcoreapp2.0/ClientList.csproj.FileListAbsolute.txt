@@ -1,11 +1,11 @@
+C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.csprojAssemblyReference.cache
+C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.csproj.CoreCompileInputs.cache
+C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.AssemblyInfoInputs.cache
+C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.AssemblyInfo.cs
 C:\Dev\personal\dotnet\ClientList\ClientList\bin\Debug\netcoreapp2.0\ClientList.deps.json
 C:\Dev\personal\dotnet\ClientList\ClientList\bin\Debug\netcoreapp2.0\ClientList.runtimeconfig.json
 C:\Dev\personal\dotnet\ClientList\ClientList\bin\Debug\netcoreapp2.0\ClientList.runtimeconfig.dev.json
 C:\Dev\personal\dotnet\ClientList\ClientList\bin\Debug\netcoreapp2.0\ClientList.dll
 C:\Dev\personal\dotnet\ClientList\ClientList\bin\Debug\netcoreapp2.0\ClientList.pdb
-C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.csprojAssemblyReference.cache
-C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.csproj.CoreCompileInputs.cache
-C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.AssemblyInfoInputs.cache
-C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.AssemblyInfo.cs
 C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.dll
 C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.pdb

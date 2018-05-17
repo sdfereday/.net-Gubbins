@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "f65ed9aa48a179d67a3d83094ec3340b3a92215c"
+    "signature": "0ef0e7ef6ff92e7b03e21b16fa5421f8b2f6f78a"
   },
   "compilationOptions": {
     "defines": [
@@ -25,6 +25,8 @@
         "dependencies": {
           "AutoMapper": "7.0.0-alpha-0001",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "3.2.0",
+          "MediatR": "4.1.0",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "4.1.0",
           "Microsoft.AspNetCore.All": "2.0.8",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.3"
@@ -98,6 +100,26 @@
             "rid": "win-x86",
             "assetType": "native"
           }
+        }
+      },
+      "MediatR/4.1.0": {
+        "runtime": {
+          "lib/netstandard2.0/MediatR.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/MediatR.dll": {}
+        }
+      },
+      "MediatR.Extensions.Microsoft.DependencyInjection/4.1.0": {
+        "dependencies": {
+          "MediatR": "4.1.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
       "Microsoft.ApplicationInsights/2.4.0": {
@@ -4284,6 +4306,20 @@
       "sha512": "sha512-GsCf4q+eyaI49rCPlgYxdxa1SQCysXFFdSJWdstrwxytg4+VPYLYrXD4AT2rjHVJ+UF7SSWX9CapWEYaU4ejVQ==",
       "path": "libuv/1.10.0",
       "hashPath": "libuv.1.10.0.nupkg.sha512"
+    },
+    "MediatR/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xpResbmpvPjlZOApIyUgrhGksGYVTuxb3bYP0LolmlpCcXrkujuTTFm6NyCFN8MZkYDgsPpn4QWdxWLBMxoVYA==",
+      "path": "mediatr/4.1.0",
+      "hashPath": "mediatr.4.1.0.nupkg.sha512"
+    },
+    "MediatR.Extensions.Microsoft.DependencyInjection/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-peC+M9H+bCtk+IAYvdqQOV5kN88+oAo36FoPpGKVRUXYQJ2QKNdMKQORm0XzGW1WFfllJws5wkUzv4eGxZ5PZw==",
+      "path": "mediatr.extensions.microsoft.dependencyinjection/4.1.0",
+      "hashPath": "mediatr.extensions.microsoft.dependencyinjection.4.1.0.nupkg.sha512"
     },
     "Microsoft.ApplicationInsights/2.4.0": {
       "type": "package",
