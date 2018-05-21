@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ClientList.Models
+namespace ClientList.Features.User.Models
 {
     public class UserModel
     {

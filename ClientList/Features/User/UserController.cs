@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ClientList.Models;
-using ClientList.ViewModels;
-using ClientList.Mapping;
 using AutoMapper;
-namespace ClientList.Controllers
+using ClientList.Common.Data;
+using ClientList.Features.Client.ViewModels;
+using ClientList.Features.User.Models;
+using ClientList.Features.User.ViewModels;
+
+namespace ClientList.Features.User.Controllers
 {
     public class UserController : Controller
     {
@@ -25,12 +27,6 @@ namespace ClientList.Controllers
             return _context.Users
                 .ToList()
                 .Find(x => x.Id == Id);
-        }
-
-        public IActionResult Index()
-        {
-            var userMapping = this._mapper.Map<IEnumerable<UserViewModel>>(_context.Users);
-            return View(userMapping);
         }
 
         [HttpGet]
@@ -59,7 +55,7 @@ namespace ClientList.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditList()
+        public IActionResult List()
         {
             var userMapping = this._mapper.Map<IEnumerable<UserViewModel>>(_context.Users);
             return View(userMapping);

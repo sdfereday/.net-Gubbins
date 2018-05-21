@@ -1,7 +1,8 @@
-﻿@model ClientList.ViewModels.UserViewModel;
+﻿@using ClientList.Features.User.ViewModels;
+@model UserViewModel;
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit User";
 }
 <html>
 <head>
@@ -13,13 +14,7 @@
         <div class="row">
             <div class="col">
                 <h2>@ViewData["Title"].</h2>
-                <ul class="nav">
-                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Client")</li>
-                    <li class="nav-item">@Html.ActionLink("List Clients", "EditList", "Client")</li>
-                    <li class="nav-item">@Html.ActionLink("Create Client", "Create", "Client")</li>
-                    <li class="nav-item">@Html.ActionLink("List Users", "EditList", "User")</li>
-                    <li class="nav-item">@Html.ActionLink("Create User", "Create", "User")</li>
-                </ul>
+                @await Html.PartialAsync("Nav")
                 <form action="@Model.Id" method="post">
                     <p>Associated Client:</p>
                     <p><strong>@Model.ClientId</strong></p>

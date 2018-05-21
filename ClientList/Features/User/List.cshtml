@@ -1,0 +1,55 @@
+﻿@using ClientList.Features.User.ViewModels;
+@model IEnumerable<UserViewModel>;
+
+@{
+    ViewData["Title"] = "Users";
+    bool noData = Model.Count() == 0;
+}
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>@ViewData["Title"].</h2>
+                @await Html.PartialAsync("Nav")
+                @if (noData)
+                {
+                    <p>Couldn't find any users.</p>
+                }
+                else
+                {
+                    <ul class="list">
+                        @foreach (var item in Model)
+                        {
+                            <li>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title"><a href="Edit/@item.Id">Edit User</a></h3>
+                                        <dl>
+                                            <dt>Associated Client:</dt>
+                                            <dd>@item.ClientId</dd>
+                                            <dt>First Name:</dt>
+                                            <dd>@item.FirstName</dd>
+                                            <dt>Last Name:</dt>
+                                            <dd>@item.LastName</dd>
+                                            <dt>Email:</dt>
+                                            <dd>@item.Email</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

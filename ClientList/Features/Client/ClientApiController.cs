@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ClientList.Models;
-using ClientList.ViewModels;
-using ClientList.Mapping;
+using ClientList.Common.Data;
+using ClientList.Features.Client.Models;
+using ClientList.Features.Client.ViewModels;
 using AutoMapper;
 
-namespace ClientList
+namespace ClientList.Features.Client.Controllers
 {
     [Route("api/[controller]")]
     public class ClientApiController : Controller

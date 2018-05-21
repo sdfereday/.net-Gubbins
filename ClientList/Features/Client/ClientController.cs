@@ -3,21 +3,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ClientList.Models;
-using ClientList.ViewModels;
-using ClientList.Mapping;
+using ClientList.Features.Client.Models;
+using ClientList.Features.Client.ViewModels;
+using ClientList.Features.User.ViewModels;
+using ClientList.Common.Data;
 using AutoMapper;
-namespace ClientList.Controllers
+using MediatR;
+
+namespace ClientList.Features.Client.Controllers
 {
     public class ClientController : Controller
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
-        public ClientController(DataContext context, IMapper mapper)
+        public ClientController(DataContext context, IMapper mapper, IMediator mediator)
         {
             this._context = context;
             this._mapper = mapper;
+            this._mediator = mediator;
         }
 
         public ClientModel GetClientById(Guid Id)
@@ -41,12 +46,6 @@ namespace ClientList.Controllers
             return clientMap;
         }
 
-        public IActionResult Index()
-        {
-            var clientMapping = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients);
-            return View(clientMapping);
-        }
-
         [HttpGet]
         public IActionResult Create()
         {
@@ -65,11 +64,17 @@ namespace ClientList.Controllers
 
             _context.Clients.Add(modelMapping);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Edit");
+
+            return RedirectToAction("List");
+
+            // This doesn't work. Why?
+            //return RedirectToAction("Edit", new ClientModel() {
+            //    Id = client.Id
+            //});
         }
 
         [HttpGet]
-        public IActionResult EditList()
+        public IActionResult List()
         {
             var mappingWithUsers = new List<ClientViewModel>();
 
@@ -82,18 +87,17 @@ namespace ClientList.Controllers
             return View(mappingWithUsers);
         }
 
-        [HttpGet("Client/Edit/{id}")]
-        public IActionResult Edit(Guid id)
+        // Query from frontend is cast as a Get.GetClientQuery object which is mapped in to the mediator.
+        public async Task<IActionResult> Edit(Edit.GetClientQuery getClientQuery)
         {
-            var clientModel = GetClientById(id);
-
-            if(clientModel == null)
+            if(getClientQuery == null)
             {
-                return View("EditList");
+                throw new ArgumentNullException("getClientQuery");
             }
 
-            var clientViewModel = this._mapper.Map<ClientViewModel>(clientModel);
-            return View(clientViewModel);
+            var client = await this._mediator.Send(getClientQuery);
+
+            return View(client);
         }
 
         [HttpPost]
@@ -103,7 +107,7 @@ namespace ClientList.Controllers
 
             _context.Clients.Update(modelMapping);
             await _context.SaveChangesAsync();
-            return RedirectToAction("EditList");
+            return RedirectToAction("List");
         }
     }
 }

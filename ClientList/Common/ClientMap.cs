@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
+using ClientList.Features.Client.ViewModels;
+using ClientList.Features.Client.Models;
+using ClientList.Features.User.ViewModels;
+using ClientList.Features.User.Models;
 
-namespace ClientList.Mapping
+namespace ClientList.Common.Mapping
 {
     public class ClientMap : Profile
     {
         public ClientMap()
         {
-            CreateMap<Models.ClientModel, ViewModels.ClientViewModel>();
-            CreateMap<Models.UserModel, ViewModels.UserViewModel>()
+            CreateMap<ClientModel, ClientViewModel>();
+            CreateMap<UserModel, UserViewModel>()
                 .ForMember(x => x.Clients, opt => opt.Ignore());
         }
     }    

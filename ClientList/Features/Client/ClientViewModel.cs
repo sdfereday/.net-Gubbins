@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ClientList.Models;
+using ClientList.Features.User.ViewModels;
 
-namespace ClientList.ViewModels
+namespace ClientList.Features.Client.ViewModels
 {
     public class ClientViewModel
     {

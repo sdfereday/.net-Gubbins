@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace ClientList.Models
+namespace ClientList.Features.Client.Models
 {
     public class ClientModel
     {

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ClientList.Features.Client.Models;
+using ClientList.Features.User.Models;
 
-namespace ClientList.Models
+namespace ClientList.Common.Data
 {
     public class DataContext : DbContext
     {
