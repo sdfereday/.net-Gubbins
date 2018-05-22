@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using MediatR;
 using ClientList.Common.Data;
@@ -14,13 +15,18 @@ namespace ClientList.Features.Client
     public class Edit
     {
         // Query object passed from controller on request as type of GetClientViewModel ->
-        public class GetClientQuery : IRequest<GetClientViewModel>
+        // - You can really pass anything here, for it's what is returned from the query.
+        // - In some instances you won't even need a query (such as 'creating').
+        // - More to that, you may not even need a post type if it's just to return a list.
+        // This is all specced out in the handlers anyway, so you add what you need.
+        public class EditClientQuery : IRequest<EditClientViewModel>
         {
             public Guid Id { get; set; }
         }
 
-        // Returned view model object after query complete, again returns as type GetClientViewModel <-
-        public class GetClientViewModel : IRequest<GetClientViewModel>
+        // Returned view model object after query complete, again returns as type EditClientViewModel
+        // so try not to get confused here, it's just specifying the return type. <-
+        public class EditClientViewModel : IRequest<EditClientViewModel>
         {
             public Guid Id { get; set; }
             public string Name { get; set; }
@@ -28,32 +34,44 @@ namespace ClientList.Features.Client
 
         // The handler responsible for the getting the requested data from and to the controller <-->
         // First type is the query passed on request, the second is the result returned once done.
-        public class GetClientQueryHandler : IRequestHandler<GetClientQuery, GetClientViewModel>
+        // <Received Type, Return Type>
+        public class GetClientQueryHandler : IRequestHandler<EditClientQuery, EditClientViewModel>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
 
             public GetClientQueryHandler(DataContext context, IMapper mapper)
             {
-                if (context == null)
-                {
-                    throw new ArgumentNullException("context");
-                }
-
-                if (mapper == null)
-                {
-                    throw new ArgumentNullException("mapper");
-                }
-
                 this._context = context;
                 this._mapper = mapper;
             }
 
-            // Should I be using this type on the razor page?
-            public async Task<GetClientViewModel> Handle(GetClientQuery request, CancellationToken cancellationToken)
+            public async Task<EditClientViewModel> Handle(EditClientQuery editClientQuery, CancellationToken cancellationToken)
             {
-                var client = await this._context.FindAsync<ClientModel>(request.Id);
-                return this._mapper.Map<ClientModel, GetClientViewModel>(client);
+                var client = await this._context.FindAsync<ClientModel>(editClientQuery.Id);
+                return this._mapper.Map<ClientModel, EditClientViewModel>(client);
+            }
+        }
+
+        public class EditClientQueryHandler : IRequestHandler<EditClientViewModel, EditClientViewModel>
+        {
+            private readonly DataContext _context;
+            private readonly IMapper _mapper;
+
+            public EditClientQueryHandler(DataContext context, IMapper mapper)
+            {
+                this._context = context;
+                this._mapper = mapper;
+            }
+
+            public async Task<EditClientViewModel> Handle(EditClientViewModel editClientViewModel, CancellationToken cancellationToken)
+            {
+                var modelMapping = this._mapper.Map<ClientModel>(editClientViewModel);
+
+                _context.Clients.Update(modelMapping);
+                await _context.SaveChangesAsync();
+
+                return this._mapper.Map<ClientModel, EditClientViewModel>(modelMapping);
             }
         }
     }

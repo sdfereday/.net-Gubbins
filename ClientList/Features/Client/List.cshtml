@@ -1,9 +1,9 @@
-﻿@using ClientList.Features.Client.ViewModels;
-@model IEnumerable<ClientViewModel>;
+﻿@using ClientList.Features.Client;
+@model List.ListClientResultViewModel;
 
 @{
-    ViewData["Title"] = "Clients";
-    bool noData = Model.Count() == 0;
+    ViewData["Title"] = "Dashboard";
+    bool noData = Model.Clients.Count() == 0;
 }
 <html>
 <head>
@@ -23,41 +23,12 @@
                 else
                 {
                     <ul class="list">
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Clients)
                         {
                             <li>
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 class="card-title"><a href="Client/Edit/@item.Id">Edit</a> - Name: @item.Name</h3>
-                                        <dl>
-                                            <dt>Associated Users:</dt>
-                                            @foreach (var user in item.Users)
-                                            {
-                                                <dd id="accordion-@user.Id">
-                                                    <div class="card">
-                                                        <div class="card-header" id="heading@user.Id">
-                                                            <h5 class="mb-@user.Id">
-                                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse-@user.Id" aria-expanded="false" aria-controls="collapseOne">
-                                                                    @user.FirstName @user.LastName
-                                                                </button>
-                                                            </h5>
-                                                        </div>
-                                                        <div id="collapse-@user.Id" class="collapse" aria-labelledby="heading@user.Id" data-parent="#accordion-@user.Id">
-                                                            <div class="card-body">
-                                                                <dl>
-                                                                    <dt>First Name:</dt>
-                                                                    <dd>@user.FirstName</dd>
-                                                                    <dt>Last Name:</dt>
-                                                                    <dd>@user.LastName</dd>
-                                                                    <dt>Email:</dt>
-                                                                    <dd>@user.Email</dd>
-                                                                </dl>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </dd>
-                                            }
-                                        </dl>
                                     </div>
                                 </div>
                             </li>
