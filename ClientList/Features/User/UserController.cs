@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ClientList.Common.Data;
-using ClientList.Features.Client.ViewModels;
+//using ClientList.Features.Client.ViewModels;
 using ClientList.Features.User.Models;
 using ClientList.Features.User.ViewModels;
 
@@ -35,7 +35,7 @@ namespace ClientList.Features.User.Controllers
             // Hmm...
             return View(new UserViewModel()
             {
-                Clients = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients)
+                //Clients = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients)
             });
         }
 
@@ -73,7 +73,7 @@ namespace ClientList.Features.User.Controllers
 
 
             var userViewModel = this._mapper.Map<UserViewModel>(userModel);
-            userViewModel.Clients = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients);
+            //userViewModel.Clients = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients);
 
             return View(userViewModel);
         }

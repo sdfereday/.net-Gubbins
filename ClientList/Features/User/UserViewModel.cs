@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ClientList.Features.Client.ViewModels;
+//using ClientList.Features.Client.ViewModels;
 
 namespace ClientList.Features.User.ViewModels
 {
@@ -11,6 +11,6 @@ namespace ClientList.Features.User.ViewModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public IEnumerable<ClientViewModel> Clients { get; set; }
+        //public IEnumerable<ClientViewModel> Clients { get; set; }
     }
 }
