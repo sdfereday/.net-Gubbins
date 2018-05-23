@@ -43,7 +43,7 @@ namespace UserList.Features.User.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(createUserViewModel);
+                return View(editUserViewModel);
             }
 
             var User = await this._mediator.Send(editUserViewModel);
