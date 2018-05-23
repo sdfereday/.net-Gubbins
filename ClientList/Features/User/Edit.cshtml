@@ -1,5 +1,5 @@
-﻿@using ClientList.Features.User.ViewModels;
-@model UserViewModel;
+﻿@using UserList.Features.User;
+@model Edit.EditUserViewModel;
 
 @{
     ViewData["Title"] = "Edit User";
@@ -16,23 +16,8 @@
                 <h2>@ViewData["Title"].</h2>
                 @await Html.PartialAsync("Nav")
                 <form action="@Model.Id" method="post">
-                    <p>Associated Client:</p>
-                    <p><strong>@Model.ClientId</strong></p>
-                    @if (Model != null && Model.Clients != null && Model.Clients.Count() > 0)
-                    {
-                        @Html.DropDownListFor(model => model.ClientId, new SelectList(Model.Clients, "Id", "Name"), "Select Associated Client", new { @id = "ClientId", @class = "input-large form-control" })
-                    }
-                    else
-                    {
-                        <p>No clients found.</p>
-
-                    }
                     <p>@Html.DisplayNameFor(model => model.FirstName)</p>
                     @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                    <p>@Html.DisplayNameFor(model => model.LastName)</p>
-                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                    <p>@Html.DisplayNameFor(model => model.Email)</p>
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                     <input type="submit" />
                 </form>
             </div>

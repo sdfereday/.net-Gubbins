@@ -1,5 +1,5 @@
-﻿@using ClientList.Features.User.ViewModels;
-@model UserViewModel;
+﻿@using UserList.Features.User;
+@model Create.CreateUserViewModel;
 
 @{
     ViewData["Title"] = "Create User";
@@ -15,27 +15,15 @@
             <div class="col">
                 <h2>@ViewData["Title"].</h2>
                 @await Html.PartialAsync("Nav")
-                <p>
-                    Enter a first name.
-                </p>
-                <form method="POST">
-                    <p>Associated Client:</p>
-                    @if (Model != null && Model.Clients != null && Model.Clients.Count() > 0)
-                    {
-                        @Html.DropDownListFor(model => model.ClientId, new SelectList(Model.Clients, "Id", "Name"), "Select Associated Client", new { @id = "ClientId", @class = "input-large form-control" })
-                    }
-                    else
-                    {
-                        <p>No clients found.</p>
-                    }
-                    <p>First Name:</p>
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                    <p>Last Name:</p>
-                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                    <p>Email Address:</p>
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @using (Html.BeginForm())
+                {
+                    <dl>
+                        <dt>Enter client name.</dt>
+                        <dd>@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })</dd>
+                        <dd>@Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger" })</dd>
+                    </dl>
                     <input type="submit" />
-                </form>
+                }
             </div>
         </div>
     </div>

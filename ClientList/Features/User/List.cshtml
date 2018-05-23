@@ -1,9 +1,9 @@
-﻿@using ClientList.Features.User.ViewModels;
-@model IEnumerable<UserViewModel>;
+﻿@using UserList.Features.User;
+@model List.ListUserResultViewModel;
 
 @{
-    ViewData["Title"] = "Users";
-    bool noData = Model.Count() == 0;
+    ViewData["Title"] = "Dashboard";
+    bool noData = Model.Users.Count() == 0;
 }
 <html>
 <head>
@@ -18,27 +18,17 @@
                 @await Html.PartialAsync("Nav")
                 @if (noData)
                 {
-                    <p>Couldn't find any users.</p>
+                    <p>Couldn't find any Users.</p>
                 }
                 else
                 {
                     <ul class="list">
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Users)
                         {
                             <li>
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title"><a href="Edit/@item.Id">Edit User</a></h3>
-                                        <dl>
-                                            <dt>Associated Client:</dt>
-                                            <dd>@item.ClientId</dd>
-                                            <dt>First Name:</dt>
-                                            <dd>@item.FirstName</dd>
-                                            <dt>Last Name:</dt>
-                                            <dd>@item.LastName</dd>
-                                            <dt>Email:</dt>
-                                            <dd>@item.Email</dd>
-                                        </dl>
+                                        <h3 class="card-title"><a href="User/Edit/@item.Id">Edit</a> - Name: @item.FirstName</h3>
                                     </div>
                                 </div>
                             </li>
