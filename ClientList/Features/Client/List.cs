@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
 using System.Collections.Generic;
 using AutoMapper;
 using MediatR;
 using ClientList.Common.Data;
-using ClientList.Features.User.ViewModels;
 
 namespace ClientList.Features.Client
 {

@@ -1,91 +1,60 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using ClientList.Common.Data;
-//using ClientList.Features.Client.ViewModels;
-using ClientList.Features.User.Models;
-using ClientList.Features.User.ViewModels;
+using MediatR;
 
-namespace ClientList.Features.User.Controllers
+namespace UserList.Features.User.Controllers
 {
     public class UserController : Controller
     {
-        private readonly DataContext _context;
-        private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
-        public UserController(DataContext context, IMapper mapper)
+        public UserController(IMediator mediator)
         {
-            this._context = context;
-            this._mapper = mapper;
-        }
-
-        public UserModel GetUserById(Guid Id)
-        {
-            return _context.Users
-                .ToList()
-                .Find(x => x.Id == Id);
+            this._mediator = mediator;
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            // Hmm...
-            return View(new UserViewModel()
-            {
-                //Clients = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients)
-            });
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(UserViewModel user)
+        public async Task<IActionResult> Create(Create.CreateUserViewModel createUserViewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(createUserViewModel);
             }
 
-            var modelMapping = this._mapper.Map<UserModel>(user);
-
-            _context.Users.Add(modelMapping);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Edit");
+            var User = await this._mediator.Send(createUserViewModel);
+            return RedirectToAction("List");
         }
 
         [HttpGet]
-        public IActionResult List()
+        public async Task<IActionResult> Edit(Edit.EditUserQuery editUserQuery)
         {
-            var userMapping = this._mapper.Map<IEnumerable<UserViewModel>>(_context.Users);
-            return View(userMapping);
-        }
-
-        [HttpGet("User/Edit/{id}")]
-        public IActionResult Edit(Guid id)
-        {
-            var userModel = GetUserById(id);
-
-            if (userModel == null)
-            {
-                return View("EditList");
-            }
-
-
-            var userViewModel = this._mapper.Map<UserViewModel>(userModel);
-            //userViewModel.Clients = this._mapper.Map<IEnumerable<ClientViewModel>>(_context.Clients);
-
-            return View(userViewModel);
+            var User = await this._mediator.Send(editUserQuery);
+            return View(User);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id, ClientId, FirstName, LastName, Email")] UserViewModel user)
+        public async Task<IActionResult> Edit(Edit.EditUserViewModel editUserViewModel)
         {
-            var modelMapping = this._mapper.Map<UserModel>(user);
+            if (!ModelState.IsValid)
+            {
+                return View(createUserViewModel);
+            }
 
-            _context.Users.Update(modelMapping);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("EditList");
+            var User = await this._mediator.Send(editUserViewModel);
+            return RedirectToAction("List");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> List(List.ListUserQuery listUserQuery)
+        {
+            var Users = await this._mediator.Send(listUserQuery);
+            return View(Users);
         }
     }
 }

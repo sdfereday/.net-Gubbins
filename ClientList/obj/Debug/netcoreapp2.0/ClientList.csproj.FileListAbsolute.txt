@@ -1,4 +1,3 @@
-C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.csprojAssemblyReference.cache
 C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.csproj.CoreCompileInputs.cache
 C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.AssemblyInfoInputs.cache
 C:\Dev\personal\dotnet\ClientList\ClientList\obj\Debug\netcoreapp2.0\ClientList.AssemblyInfo.cs

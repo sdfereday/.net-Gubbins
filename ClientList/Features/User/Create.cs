@@ -15,8 +15,8 @@ namespace UserList.Features.User
         {
             public CreateUserValidator()
             {
-                //RuleFor(x => x.Name).NotEmpty().WithMessage("A name is required.");
-                //RuleFor(x => x.Name).Matches("^[a-zA-Z]+$").WithMessage("Must only contain letters.");
+                RuleFor(x => x.FirstName).NotEmpty().WithMessage("A name is required.");
+                RuleFor(x => x.FirstName).Matches("^[a-zA-Z]+$").WithMessage("Must only contain letters.");
             }
         }
 

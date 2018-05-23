@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 //using ClientList.Features.Client.ViewModels;
-using ClientList.Features.Client.Models;
-using ClientList.Features.User.ViewModels;
-using ClientList.Features.User.Models;
+//using ClientList.Features.Client.Models;
+//using ClientList.Features.User.ViewModels;
+//using ClientList.Features.User.Models;
 
 namespace ClientList.Common.Mapping
 {

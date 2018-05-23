@@ -24,8 +24,6 @@ namespace ClientList.Features.Client.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // Should return this view with attached validation messages from
-                // validator binding within the create mediator request.
                 return View(createClientViewModel);
             }
 
@@ -43,6 +41,11 @@ namespace ClientList.Features.Client.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Edit.EditClientViewModel editClientViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(editClientViewModel);
+            }
+
             var client = await this._mediator.Send(editClientViewModel);
             return RedirectToAction("List");
         }
