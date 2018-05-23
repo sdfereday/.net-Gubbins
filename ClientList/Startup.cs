@@ -2,11 +2,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using FluentValidation.AspNetCore;
 using ClientList.Common.Mvc;
 using ClientList.Common.Data;
 
@@ -31,6 +29,7 @@ namespace ClientList
             services.AddAutoMapper(typeof(Startup));
             services.AddMediatR(typeof(Startup));
             services.AddMvc()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining(typeof(Startup)))
                 .AddControllersAsServices();
             services.AddRouting();
         }

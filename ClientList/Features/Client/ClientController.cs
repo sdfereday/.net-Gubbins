@@ -22,6 +22,13 @@ namespace ClientList.Features.Client.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Create.CreateClientViewModel createClientViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                // Should return this view with attached validation messages from
+                // validator binding within the create mediator request.
+                return View(createClientViewModel);
+            }
+
             var client = await this._mediator.Send(createClientViewModel);
             return RedirectToAction("List");
         }

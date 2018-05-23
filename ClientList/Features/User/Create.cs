@@ -7,5 +7,6 @@ namespace ClientList.Features.User
 {
     public class Create
     {
+        //public class 
     }
 }

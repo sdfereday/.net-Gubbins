@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using MediatR;
+using FluentValidation;
 using ClientList.Common.Data;
 using ClientList.Features.Client.Models;
 
@@ -14,6 +14,18 @@ namespace ClientList.Features.Client
     /// </summary>
     public class Edit
     {
+        // With a validator added, this will be included in the various requests
+        // before anything further can happen and define the model state going forward
+        // for the controller to observe.
+        public class EditClientValidator : AbstractValidator<EditClientViewModel>
+        {
+            public EditClientValidator()
+            {
+                RuleFor(x => x.Name).NotEmpty().WithMessage("A name is required.");
+                RuleFor(x => x.Name).Matches("^[a-zA-Z]+$").WithMessage("Must only contain letters.");
+            }
+        }
+
         // Query object passed from controller on request as type of GetClientViewModel ->
         // - You can really pass anything here, for it's what is returned from the query.
         // - In some instances you won't even need a query (such as 'creating').
